@@ -1,0 +1,21 @@
+#Data
+preprocessing/data/*
+validation/sdss_unez_inference_data_0.h5
+validation/preprocessed_data.h5
+training/training_data.h5
+
+
+#Slurm output
+validation/sbatch_output
+sbatch_output/
+preprocessing/sbatch_output
+
+#Training runs
+training/runs/*
+
+#Plots
+validation/validation_plots/unez_fits/*
+validation/validation_plots/unez_fits_outliers/*
+validation/validation_plots/unez_loss/*
+validation/validation_plots/unez_loss_outliers/*
+

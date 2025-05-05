@@ -1,0 +1,183 @@
+# config.yaml
+physicsinfo:
+  max_z: 1.0                                # Maximum expected redshift
+  len_data: 13887                            # Number of wavelength bins in input spectra
+  x_max: 11000                              # Maximum observed wavelength [Angstroms]
+  resolution: 3.32991283333e-05                 # Wavelength bin width [log_10(Angstroms)]
+  means:                                    # Expected emission/absorption line wavelengths [Angstroms]
+    - 1033.82
+    - 1215.24
+    - 1240.81
+    - 1305.53
+    - 1335.31
+    - 1397.61
+    - 1399.8
+    - 1549.48
+    - 1640.4
+    - 1665.85
+    - 1857.4
+    - 1908.734
+    - 2326.0
+    - 2439.5
+    - 2799.117
+    - 3346.79
+    - 3426.85
+    - 3727.092
+    - 3729.875
+    - 3889.0
+    - 4072.3
+    - 4102.89
+    - 4341.68
+    - 4364.436
+    - 4862.68
+    - 4932.603
+    - 4960.295
+    - 5008.240
+    - 6302.046
+    - 6365.536
+    - 6529.03
+    - 6549.86
+    - 6564.61
+    - 6585.27
+    - 6718.29
+    - 6732.67
+    - 3934.777
+    - 3969.588
+    - 4305.61
+    - 5176.7
+    - 5895.6
+    - 8500.36
+    - 8544.44
+    - 8664.52
+  columns:                                  #Expected emission/absorption line names 
+    - O VI
+    - Lyα
+    - N V
+    - O I
+    - C II
+    - Si IV
+    - Si IV + O IV
+    - C IV
+    - He II
+    - [O III]
+    - Al III
+    - C III
+    - C II
+    - Ne IV
+    - Mg II
+    - [Ne V]
+    - Ne VI
+    - [O II]
+    - [O II]
+    - He I
+    - [S II]
+    - Hδ
+    - Hγ
+    - [O III]
+    - Hβ
+    - [O III]
+    - [O III]
+    - [O III]
+    - O I
+    - O I
+    - N I
+    - [N II]
+    - Hα
+    - [N II]
+    - [S II]
+    - [S II]
+    - K
+    - H
+    - G
+    - Mg
+    - Na
+    - CaII
+    - CaII
+    - CaII
+    - Z
+  activations:                               # Expected emission/absorption line classifications
+    - 0                                      # 0: Absorption or Emission
+    - 0                                      # 1: Emission       
+    - 0                                      # -1: Absorption 
+    - 1
+    - 1
+    - 1
+    - 1
+    - 0
+    - 0
+    - 1
+    - 0
+    - 1
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 1
+    - 0
+    - 1
+    - 0
+    - 0
+    - 1
+    - 0
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 0
+    - 1
+    - 1
+    - 1
+    - -1
+    - -1 
+    - -1 
+    - -1 
+    - -1 
+    - -1 
+    - -1 
+    - -1 
+
+
+
+
+
+preprocessinginfo:
+  min_snr: 0                                # Minimum SNR cut
+  max_snr: 99999                            # Maximum SNR cut
+  num_files: 5000000                          # Number of files to process from the directory
+  fits_directory: starburst_fits            # Directory with files
+  raw_data_file: sdss_data.h5               # H5 file with raw spectra
+  output_file: preprocessed_data.h5             # Output file with training-ready data
+  batch_size: 16384
+
+
+traininginfo:
+  learning_rate: 0.00001                    # UNEZ training learning rate
+  batch_size: 8                            # Training batch size
+  top_k: 90                                 # Number of redshifts to consider in training loss function 
+  r_0: 60                                   # Initial radius for training loss function (decays fo 0.005 over 15 epochs)
+  epochs: 50                                # Training epochs
+  training_data: training_data.h5
+  model_name: lowz_model                    # Model name
+  alpha: 0.25
+  finetune: False                            # Loss function MSE and cosine similarity weight parameter
+  training_points: 100000
+  min_snr: 5
+
+validationinfo:
+  output_validation_file: sdss_unez_inference_data.h5 # Inference data file
+  validation_directory: starburst_fits/     # FITS files directory for validation
+  model_name: lowz_model_5                # Model name
+  input_data_file: preprocessed_data.h5
+  batch_size: 128
+  
+plottinginfo:
+  num_points: -1                            # Number of points to consider for plotting (set as -1 to plot all)
+  min_snr: 3                                # Minimum SNR cut
+  num_plotting_points: 5000                 # Number of points to plot 
+  plot: True                                # Set True to plot spectra and UNEZ fits
+  inference_file: sdss_unez_inference_data.h5    # Inference data file
