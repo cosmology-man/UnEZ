@@ -169,9 +169,9 @@ traininginfo:
   min_snr: 5
 
 validationinfo:
-  output_validation_file: sdss_unez_inference_data_0.h5 # Inference data file
+  output_validation_file: sdss_unez_inference_data_1.h5 # Inference data file
   validation_directory: starburst_fits/     # FITS files directory for validation
-  model_name: lowz_model_4                # Model name
+  model_name: lowz_model_10_supervised                # Model name
   input_data_file: preprocessed_data.h5
   batch_size: 256
   
@@ -180,4 +180,4 @@ plottinginfo:
   min_snr: 3                                # Minimum SNR cut
   num_plotting_points: 20000                 # Number of points to plot 
   plot: True                                # Set True to plot spectra and UNEZ fits
-  inference_file: sdss_unez_inference_data_0.h5    # Inference data file
+  inference_file: sdss_unez_inference_data_1.h5    # Inference data file

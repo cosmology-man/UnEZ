@@ -163,7 +163,7 @@ traininginfo:
   epochs: 50                                # Training epochs
   training_data: training_data.h5
   model_name: lowz_model                    # Model name
-  alpha: 0.25
+  alpha: 0.9
   finetune: False                            # Loss function MSE and cosine similarity weight parameter
   training_points: 100000
   min_snr: 5

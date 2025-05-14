@@ -70,6 +70,8 @@ try:
         flux = f['preprocessed_flux'][:num_to_load]
         redshift = f['z_true'][:num_to_load]
         snr = f['snr'][:num_to_load]
+        classes = f['class'][:num_to_load]
+        print(classes[-1])
 
         print(f"Loaded initial data shapes:")
         print(f"  Flux: {flux.shape}")
@@ -106,6 +108,7 @@ snr_mask = [i for i, n in enumerate(snr) if n > min_snr]
 flux = flux[snr_mask]
 redshift = redshift[snr_mask]
 snr = snr[snr_mask] # Filter SNR array itself as well
+classes = classes[snr_mask]
 
 count_after_snr_cut = len(snr)
 print(f"Samples before SNR cut: {initial_count}")
